@@ -1,0 +1,245 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<script type="text/javascript" src="d3.v3.min.js"></script>
+<script src="https://d3plus.org/js/d3.js"></script>
+<script src="https://d3plus.org/js/topojson.js"></script>
+<script src="https://d3plus.org/js/d3plus.js"></script>
+<script src="data1-2006.js"></script>
+<script src="data1-2007.js"></script>
+<script src="data1-2008.js"></script>
+<script src="data1-2009.js"></script>
+<script src="data1-2010.js"></script>
+<script src="data1-2011.js"></script>
+<script src="data1-2012.js"></script>
+<script src="jsnetworkx.js"></script>
+<style>
+  body {
+    background-color: #414F75
+  }
+
+  h1{
+    text-align: center;
+    padding: 10px;
+    font-family: "Century Gothic";
+    color: #D7DFF3 ;
+    font-weight: normal;
+  }
+  p{
+    text-align: left;
+    color: #c3cbdf;
+    padding: 15px 30px;
+    font-family: "Optima";
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 25px;
+
+  }
+
+  .parent{
+    margin: auto;
+    text-align: center;
+    display: flex;
+    align-items: center;
+
+  }
+
+  .info{
+    border: solid 1px;
+    border-color: #272f46;
+    width: 300px;
+    height: 200px;
+    display: inline-block;
+    background: #313d5a;
+    margin: auto;
+  }
+  .rect_d3plus_data{
+    fill: #3CEDA6
+  }
+  d3-tip{
+    font-family: 'Century Gothic, Helvetica, sans-serif';
+    line-height: 1;
+    font-weight: normal;
+    padding: 12px;
+    background: #272f46);
+    color: #ffffff;
+    border-color: #3CEDA6;
+    border-width: 1px;
+    text-align: right;
+    font-size: 12px
+}
+
+  .nets{
+    background-color: #414F75;
+    margin: right;
+    display: inline-block;
+  }
+</style>
+<script>
+  window.addEventListener('load', function() {
+
+    var data2008 = data12008;
+
+    var G = new jsnx.Graph();
+
+    G.addNodesFrom(data2008.nodes.map(function(obj){
+      return [obj.id, {}] ;
+    }));
+
+    G.addEdgesFrom(data2008.links.map(function(obj) {
+      return [data2008.nodes[obj.source].id, data2008.nodes[obj.target].id, data2008.transactions];
+    }));
+
+    jsnx.draw(G, {
+      element: '#canvas',
+      weighted: false,
+      withLabels: true,
+      height: 600,
+      width: 600,
+
+    edgeStyle: {
+      'stroke-width': 2 ,
+      fill: '#C5D4EB'
+    },
+
+    nodeAttr: {r: 6},
+
+    layoutAttr: {
+        charge: -90,
+        linkDistance: 60
+    },
+
+    nodeStyle: {
+        fill: '#3CEDA6',
+        stroke: 'none'
+    },
+
+    labelAttr:{
+      x:10,
+      y:20,
+
+    },
+
+    stickyDrag: true,
+
+    labelStyle: {
+      fill:'#191e2d',
+      'font-family': 'Century Gothic, sans serif',
+      'font-size' : 14
+
+   },
+  });
+
+      var data2010 = data12010;
+
+      var G = new jsnx.Graph();
+
+      G.addNodesFrom(data2010.nodes.map(function(obj){
+        return [obj.id, {}] ;
+      }));
+
+      G.addEdgesFrom(data2010.links.map(function(obj) {
+        return [data2010.nodes[obj.source].id, data2010.nodes[obj.target].id, obj.zscore];
+      }));
+
+      jsnx.draw(G, {
+        element: '#canvas1',
+        weighted: false,
+        withLabels: true,
+        height: 600,
+        width: 600,
+
+      edgeStyle: {
+        'stroke-width': 2,
+        fill: '#C5D4EB'
+      },
+
+      nodeAttr: {r: 6},
+
+      layoutAttr: {
+          charge: -90,
+          linkDistance: 60
+      },
+
+      nodeStyle: {
+          fill: 'C911FF',
+          stroke: 'none'
+      },
+
+          //'#66d9ff',	//'#ff668c',//'#ccff33',
+          // function(obj, zero, index) {
+          //   return data2008.nodes[index].color;
+            //return col.data2008.nodes.color
+          //},
+
+      labelAttr:{
+        x:10,
+        y:20,
+
+      },
+
+      stickyDrag: true,
+
+      labelStyle: {
+        fill:'#191e2d',
+        'font-family': 'Century Gothic, sans serif',
+        'font-size' : 14
+
+     },
+    });
+
+    var data = [
+      {"year": 2008, "name":"Canada", "value": 72271, "color": "#ff0000" },
+      {"year": 2008, "name":"United Kingdom", "value": 28017},
+      {"year": 2008, "name":"Australia", "value": 24163},
+      {"year": 2008, "name":"Germany", "value": 16034},
+      {"year": 2008, "name":"Netherlands", "value": 13653},
+      {"year": 2008, "name":"France", "value": 10911},
+    ]
+    var visualization = d3plus.viz()
+      .container("#dist2008")
+      .data(data)
+      .type("bar")
+      .id("name")
+      .color({ value: "color", missing: "#0000ff" })
+      .x("year")
+      .y("value")
+       /* .order('asc') messes up the x axis, so if I can count the number of bars before me, and multiply it by width, then I can have my x position. */
+      .draw()
+
+  });
+</script>
+</head>
+<body>
+  <h1>Kiva Network Visualizations</h1>
+  <div class= 'parent' style="width: 100%;">
+    <div class= 'nets' id="canvas" ></div>
+    <div class = 'info' style="display:flex">
+      <p style= 'align-items: center ' >
+         Number of Nodes <br>
+         Number of edges       <br>
+         Average in-degree    <br>
+         Average out-degree   <br>
+         Density
+      </p>
+      <div>
+        <p> 180   <br>
+            7,391 <br>
+            41.06 <br>
+            41.06 <br>
+            0.229 <br>
+        </p>
+      </div>
+    </div>
+    <div class= 'info' id='dist2008'></div>
+
+  </div>
+  <div class= 'parent' style="width: 100%;">
+    <div class= 'nets' id="canvas1" ></div>
+    <div style='width: 50%'>
+      <p>2010</p>
+    </div>
+  </div>
+</body>
+</html>
