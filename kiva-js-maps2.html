@@ -1,0 +1,122 @@
+<!doctype html>
+
+<html>
+  <head>
+      <meta charset="utf-8">
+      <script src="https://d3plus.org/js/d3.js"></script>
+      <script src="https://d3plus.org/js/topojson.js"></script>
+      <script src="https://d3plus.org/js/d3plus.js"></script>
+      <style>
+      body {background-color: #414F75; font-size: 18px; font-family: 'Century Gothic'}
+      h1   {
+        color: #ffffff;
+        font-family: 'Century Gothic';
+        letter-spacing: 1px;
+        background-color: #414F75;
+        text-align:right;
+        font-weight: lighter;
+        padding-top: 20px;
+        margin-bottom: 0
+       }
+
+      p    {color: #ffffff ;}
+
+      .d3plus_tooltip_data_name, .d3plus_tooltip_data_value {
+        color: #ffffff;
+      }
+
+      .map {
+        border: 5px #161d30;
+        color: #1b233a;
+        background-color: #2D3B61;
+        margin: auto ;
+        width: 70%;
+        font-size: 18px;
+
+      }
+
+      .text {
+        margin: 80px auto 0 auto;
+        color: #00CAFF
+      }
+      </style>
+      <script>
+        window.addEventListener('load', function() {
+
+          var sample_data = [
+
+            // Lenders
+            {'country': 'nausa', 'name': 'United States' ,'Lending Transactions':1550033, 'color1': '#00CAFF', 'color5': '#00CAFF', 'color10': '#00CAFF', 'Top destinations': 'Philippines, Peru, Kenya' }
+          , {'country': 'nacan', 'name': 'Canada'        ,'Lending Transactions': 254340, 'color5': '#00CAFF', 'color10': '#00CAFF','Top destinations':'Peru, Philippines, Kenya' }
+          , {'country': 'ocaus', 'name': 'Australia'     ,'Lending Transactions': 164481, 'color5': '#00CAFF', 'color10': '#00CAFF','Top destinations':'Peru, Philippines, Kenya' }
+          , {'country': 'eugbr', 'name': 'United Kingdom','Lending Transactions': 134787, 'color5': '#00CAFF', 'color10': '#00CAFF','Top destinations': 'Peru, Philippines, Kenya' }
+          , {'country': 'eudeu', 'name': 'Germany'       ,'Lending Transactions': 98846,  'color5': '#00CAFF', 'color10': '#00CAFF','Top destinations':'Peru, Philippines, Kenya' }
+          , {'country': 'eunld', 'name': 'Netherlands'   ,'Lending Transactions': 77780,  'color10': '#00CAFF','Top destinations': 'Kenya, Tanzania, Uganda' }
+          , {'country': 'eunor', 'name': 'Norway'        ,'Lending Transactions': 69395,  'color10': '#00CAFF','Top destinations':'Peru, Philippines, Kenya' }
+          , {'country': 'euswe', 'name': 'Sweden'        ,'Lending Transactions': 44332,  'color10': '#00CAFF','Top destinations': 'Kenya, Tanzania, Uganda' }
+          , {'country': 'euche', 'name': 'Switzertland'  ,'Lending Transactions': 32405,  'color10': '#00CAFF','Top destinations':'Peru, Philippines, Kenya' }
+          , {'country': 'eufra', 'name': 'France'       ,'Lending Transactions': 26608,  'color10': '#00CAFF','Top destinations':'Peru, Philippines, Kenya' }
+
+            // Borrowers
+          , {'country': 'saper', 'name': 'Peru'       ,'Borrowing Transactions': 222094, 'color1': '#B1FF00', 'color5': '#B1FF00', 'color10': '#B1FF00', 'Top sources': 'US, Canada, Australia' }
+          , {'country': 'afken', 'name': 'Kenya'      ,'Borrowing Transactions': 172674, 'color5': '#B1FF00', 'color10': '#B1FF00','Top sources': 'US, Canada, Australia' }
+          , {'country': 'asphl', 'name': 'Philippines','Borrowing Transactions': 230439, 'color5': '#B1FF00', 'color10': '#B1FF00','Top sources': 'US, Canada, Australia'}
+          , {'country': 'saecu', 'name': 'Ecuador'    ,'Borrowing Transactions': 117987, 'color5': '#B1FF00', 'color10': '#B1FF00','Top sources': 'US, Canada, Australia'}
+          , {'country': 'askhm', 'name': 'Cambodia'   ,'Borrowing Transactions': 111719, 'color5': '#B1FF00', 'color10': '#B1FF00','Top sources': 'US, Canada, Australia'}
+          , {'country': 'astjk', 'name': 'Tajikistan' ,'Borrowing Transactions': 97069,  'color10': '#B1FF00','Top sources': 'US, Canada, Australia'}
+          , {'country': 'namex', 'name': 'Mexico'     ,'Borrowing Transactions': 96118,  'color10': '#B1FF00','Top sources': 'US, Canada, Australia'}
+          , {'country': 'sapry', 'name': 'Paraguay'   ,'Borrowing Transactions': 89589,  'color10': '#B1FF00','Top sources': 'US, Canada, Australia'}
+          , {'country': 'sabol', 'name': 'Bolivia'    ,'Borrowing Transactions': 85682,  'color10': '#B1FF00','Top sources': 'US, Canada, Australia'}
+          , {'country': 'asmng', 'name': 'Mongolia'   ,'Borrowing Transactions': 79062,  'color10': '#B1FF00','Top sources': 'US, Canada, Australia'}
+
+          ]
+
+
+       var visualization = d3plus.viz()
+            .container("#viz")
+            .data(sample_data)
+            .coords({
+              value:"https://d3plus.org/topojson/countries.json",
+              projection: 'mercator',
+              fit:        'auto',
+              center:     [10,72]
+            })
+            .type("geo_map")
+            .id("country")
+            .text("name")
+            .labels(false)
+            .font({'color': 'white'})
+            .color({value: 'color1', missing: '#313e60'})
+            .ui([{
+              "method": "color",
+              "type": "drop",
+              "value": [{"Top 1": "color1"}, {"Top 5": "color5"}, {"Top 10": "color10"}],
+
+            }])
+            .tooltip({
+              'background': '#272f46',//"#fffff", //'#A5B3D9',
+              'small': 250,
+              'value':["Lending Transactions", "Borrowing Transactions",
+                     "Top destinations", "Top sources"],
+              'font': {'color': '#ffffff'},
+            })
+            .background('#414F75')
+            .draw()
+
+      });
+      </script>
+  </head>
+  <body>
+    <div style='width: 80%; margin: auto; padding: 60px,'>
+    <h1 style=' font-size: 140%; color: #E4E9FF; '>
+      Top Lender and Borrower Countries <br>
+      KIVA 2012
+    </h1>
+  </div>
+    <div class="map" id="viz"></div>
+    <div class="text" style='text-align: center; font-size: 120%;'>
+      <i>Kiva is a micro-finance platform</i>
+      <p style='color: #161d30;'>rest of text</p>
+    </div>
+  </body>
+</html>
