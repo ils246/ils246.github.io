@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Josefin+Slab|Arvo|Lato|Vollkorn|Abril+Fatface|Old+Standard+TT|Droid+Sans|Lobster|Inconsolata|Montserrat|Playfair+Display|Karla|Alegreya|Libre+Baskerville|Merriweather|Lora|Archivo+Narrow|Neuton|Signika|Questrial|Fjalla+One|Bitter|Varela+Round);
+
+.background {
+  fill: #eeeefa;
+  pointer-events: all;
+}
+
+.map-layer {
+  fill: #fff;
+  stroke: #ccf;
+}
+
+.effect-layer{
+  pointer-events:none;
+}
+
+.tooltip{
+background: #eee;
+box-shadow: 0 0 5px #999999;
+color: #333;
+display: none;
+font-size: 12px;
+left: 130px;
+padding: 10px;
+position: absolute;
+text-align: center;
+top: 95px;
+width: 80px;
+}
+
+text{
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 300;
+}
+
+text.big-text{
+  font-size: 30px;
+  font-weight: 400;
+}
+
+.effect-layer text, text.dummy-text{
+  font-size: 12px;
+}
+
+</style>
+<body>
+<div style="display:flex; flex-direction:column; align-items: center;">
+<svg></svg>
+<select id='colorFill' onchange="drawmap()">
+  <option value="college-degree">College Degree</option>
+  <option value="yes">Voted Yes (%)</option>
+  <option value="afro">Afrocolombian population(%)</option>
+  <option value="indigenous">Indigineous Population(%)</option>
+</select>
+</div>
+
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<script>
+var drawmap = function(){
+
+  var width = 400,
+      height = 500,
+      centered;
+
+  // Define color scale
+
+
+    //   function(userOption){
+    //   if (userOption === 'college-degree'){
+    //     return [('#d0d0ff', '#033798' )]
+    //   }
+    //   else if (userOption === 'afro'){
+    //     return [('#fab400', '#fa6400')]
+    //   }
+    //   else{
+    //     return [('#96FA64', '#00c800')]
+    //   }
+    // });
+
+    var projection = d3.geo.mercator()
+      .scale(1500)
+      // Center the Map in Colombia
+      .center([-74, 4.5])
+      .translate([width / 2, height / 2]);
+
+    var path = d3.geo.path()
+      .projection(projection);
+
+    // Set svg width & height
+    var svg = d3.select('svg')
+      .attr('width', width)
+      .attr('height', height);
+
+    // Add background
+    svg.append('rect')
+      .attr('class', 'background')
+      .attr('width', 400)
+      .attr('height', height)
+      .on('click', clicked);
+
+    var g = svg.append('g');
+
+    var effectLayer = g.append('g')
+      .classed('effect-layer', true);
+
+    var mapLayer = g.append('g')
+      .classed('map-layer', true);
+
+    var dummyText = g.append('text')
+      .classed('dummy-text', true)
+      .attr('x', 10)
+      .attr('y', 30)
+      .style('opacity', 0);
+
+    var bigText = g.append('text')
+      .classed('big-text', true)
+      .attr('x', 20)
+      .attr('y', 45);
+
+    // This will get me the value from the option selected by the user in the dropdown menu
+    var menuOption = document.getElementById("colorFill");
+    var userOption = menuOption.selectedOptions[0].value;
+
+    var myColorRange = []
+
+    var color_range = function(userOption){
+    if (userOption === 'college-degree'){
+      myColorRange = ['#549BFD', '#000931']
+    }
+
+    else if (userOption === 'afro'){
+      myColorRange = ['#ade9e9', '#2db4b4']
+    }
+
+    else if (userOption === 'indigenous'){
+      myColorRange = ['#9bfd54', '#00D214']
+    }
+
+    else{
+      myColorRange =['#000931','#A00000']
+    }
+  }
+
+  color_range(userOption)
+
+    var color = d3.scale.linear()
+        .domain([1, 20])
+        .clamp(true)
+        .range(myColorRange)
+
+
+    var get_coloring_attribute = function(department){
+      if (userOption === 'college-degree'){
+        return department.collegeDegree
+      }
+      else if (userOption === 'indigenous'){
+        return department.indigenous
+      }
+      else if (userOption === 'afro'){
+        return department.afro
+      }
+      else{
+        return department.yes
+      }
+    }
+
+    // Load map data
+    d3.json('Colombia.geo.json', function(error, mapData) {
+      var features = mapData.features;
+
+    d3.json('dataColombia.json', function(error, dataColombia){
+
+      /*
+      Foreach item in dataColombia
+      Find its partner in mapData
+      If it doesn't exist, set its `yes` to `0`
+      Otherwise, set its `yes` to our item's `yes`
+      */
+
+    features.forEach(function(d) {
+      var partner = dataColombia.find(function(department){
+        return d.properties.NOMBRE_DPT===department.name.toUpperCase()
+      })
+      if (partner === undefined){
+         d.yes = 0
+      }
+      else {
+        d.yes = partner.yes
+        d.collegeDegree = partner.collegeDegree
+        d.indigenous = partner.indigenousPopulation
+        d.afro = partner.afrocolombianPopulation
+      }
+    });
+
+    // Update color scale domain based on data
+    color.domain([d3.min(features, get_coloring_attribute), d3.max(features,get_coloring_attribute)]);
+
+    // Draw each province as a path
+    mapLayer.selectAll('path')
+        .data(features)
+        .enter().append('path')
+        .attr('d', path)
+        .attr('vector-effect', 'non-scaling-stroke')
+        .style('fill', fillFn)
+        .on('mouseover', mouseover)
+        .on('mouseout', mouseout)
+        .on('click', clicked);
+  });
+
+});
+
+
+
+// Get province name
+function nameFn(d){
+  return d && d.properties ? d.properties.NOMBRE_DPT : null;
+}
+
+// Get province name length
+function nameLength(d){
+  var n = nameFn(d);
+  return n ? n.length : 0;
+}
+
+// Get province color
+function fillFn(d){
+  return color(get_coloring_attribute(d));
+}
+
+// When clicked, zoom in
+function clicked(d) {
+  var x, y, k;
+
+  // Compute centroid of the selected path
+  if (d && centered !== d) {
+    var centroid = path.centroid(d);
+    x = centroid[0];
+    y = centroid[1];
+    k = 4;
+    centered = d;
+  } else {
+    x = width / 2;
+    y = height / 2;
+    k = 1;
+    centered = null;
+  }
+
+  // Highlight the clicked province
+  mapLayer.selectAll('path')
+    .style('fill', function(d){return centered && d===centered ? '#D5708B' : fillFn(d);});
+
+  // Zoom
+  g.transition()
+    .duration(750)
+    .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')scale(' + k + ')translate(' + -x + ',' + -y + ')');
+}
+
+function mouseover(d){
+  // Highlight hovered province
+  d3.select(this).style('fill', '#ff7700');
+
+
+}
+
+function mouseout(d){
+  // Reset province color
+  mapLayer.selectAll('path')
+    .style('fill', function(d){return centered && d===centered ? '#D5708B' : fillFn(d);});
+
+  // Remove effect text
+  effectLayer.selectAll('text').transition()
+    .style('opacity', 0)
+    .remove();
+
+  // Clear province name
+  bigText.text('');
+}
+}
+drawmap()
+</script>
