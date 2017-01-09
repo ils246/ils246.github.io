@@ -1,0 +1,118 @@
+<html>
+  <style>
+  .light-headers{
+    font-family: "Futura", sans-serif;
+    font-weight: normal;
+    color: #e3dde9;
+    text-align: center;
+    background-color: #444245;
+  }
+  .light-headers2{
+    color:#e3dde9;
+    font-family: "aaarghnormal" , sans-serif;
+    text-align: center;
+  }
+
+  .light-text{
+    color: #b5b0ba;
+    font-family: "aaarghnormal" , sans-serif;
+    text-align: center;
+  }
+
+  .dark-headers2{
+    font-family:'Futura', sans-serif;
+    color:#59574c;
+    text-align: center;
+
+  }
+
+  .map{
+    border-width: 0;
+    width: 50%;
+    height: 700px;
+  }
+
+  .map-container{
+    padding-left: 220px;
+    padding-right: 220px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .dark{
+    color: #706D60;
+    width: 100%;
+    height: 550px;
+    flex-direction: column;
+    background-color: #444245;
+    display:flex;
+    justify-content:center;
+  }
+
+  body{
+    background-color: #e3dde9; /*#FBF8EC*/
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+
+
+  @font-face {
+      font-family: 'aaarghnormal';
+      src: url('Aaargh-webfont.eot');
+      src: url('Aaargh-webfont.eot?#iefix') format('embedded-opentype'),
+           url('Aaargh-webfont.woff') format('woff'),
+           url('Aaargh-webfont.ttf') format('truetype'),
+           url('Aaargh-webfont.svg#aaarghnormal') format('svg');
+      font-weight: normal;
+      font-style: normal;
+  }
+
+  </style>
+  <body>
+    <div class="dark">
+      <h1 class="light-headers" style="font-size:38px;padding-top:40px;padding-bottom:30px;">REFERENDUM ILLUSTRATOR</h1>
+      <p class= "light-headers2" style="font-size:20px;">What is the Referendum Illustrator?</p>
+      <p class = "light-text" style="font-size:17px;line-height:1.6;">
+        In October 2016, Colombians were asked to endorse or reject thourgh popular vote the peace agreement between the Farc and the <br>
+        Colombian government. After aproximately four years and 38 rounds of negotiations, this peace agreement promised to put an end <br>
+        to 51 years of the national conflict - one of the longest standing in Latin America. Nationals expected that the agreement would be <br>
+        ratified in order to start working towards the a long desired peace. However, the country was shocked when the results revealed that <br>
+        the opposition had won the vote by 0.2%. Some have considered this result to be comparable to the other democratic anomalies that <br>
+        occurred in 2016. The referendum illustrator enables the interactive visalization of the referendum results and their comparison against <br>
+        other demographic data at the department level.
+     </p>
+    </div>
+    <div class="dark-headers2"style="font-size:22px;padding-top:20px;">---- REFERENDUM RESULTS BY DEPARTMENT ----</div>
+    <div class="map-container" style= "display:flex; flex-direction:row;">
+      <iframe class="map" src= "./choropleth-colombia1.html"> </iframe>
+      <iframe class="map" src= "./choropleth-colombia1.html"> </iframe>
+    </div>
+    <div class="dark-headers2" style="font-size:12px;padding-bottom:15px;" >Data retreived from: <a href="http://www.wradio.com.co/noticias/actualidad/asi-se-voto-el-plebiscito-en-todos-los-departamentos-de-colombia/20161002/nota/3262897.aspx">WRadio</a> and the 2005 Census by <a href="http://www.dane.gov.co/">DANE</a> </div>
+    <div class="dark">
+      <h2 class="light-headers" style="font-size:28px;">THE NUMBERS</h2>
+      <div style="display:flex; justify-content: center">
+        <div style="width:60%;display:flex;flex-direction:column; justify-content:center;">
+          <img id= "yes-no" src = "./yes-no.png" style="height:10%;width:100%;padding-bottom:15px; padding-top:20px"></img>
+          <div style="display:flex;flex-direction:row;">
+            <div class="light-text"style="width:50%;text-align:center;font-size:20px;">Yes (49.8%)</div>
+            <div class="light-text"style="width:50%;text-align:center;font-size:20px;">No (50.2%)</div>
+          </div>
+          <img id = "yes-no-total" src="./yes-no-total.png" style="height:10%;width:100%;padding-bottom:15px;padding-top:40px"></img>
+          <div style="display:flex;flex-direction:row;">
+            <div class="light-text"style="width:18%;text-align:center;font-size:18px;">Yes (18.9%)</div>
+            <div class="light-text"style="width:18%;text-align:center;font-size:18px;">No (19.1%)</div>
+            <div class="light-text"style="width:64%;text-align:center;font-size:18px;">Did not vote (62%)</div>
+          </div>
+        </div>
+        <div style="width: 200px; height:200px;">
+          <div style="display:flex; flex-direction: column;">
+            <div class="light-headers" style="font-size: 65px; padding-top:25px;padding-left:80px;line-height:100px;">38%</div>
+            <div class="light-text" style="font-size: 25px;margin:auto; padding-top:0;padding-left:80px;">Turnout</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

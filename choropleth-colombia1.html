@@ -5,7 +5,7 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Josefin+Slab|Arvo|Lato|Vollkorn|Abril+Fatface|Old+Standard+TT|Droid+Sans|Lobster|Inconsolata|Montserrat|Playfair+Display|Karla|Alegreya|Libre+Baskerville|Merriweather|Lora|Archivo+Narrow|Neuton|Signika|Questrial|Fjalla+One|Bitter|Varela+Round);
 
 .background {
-  fill: #eeeefa;
+  fill: #e3dde9;
   pointer-events: all;
 }
 
@@ -19,7 +19,7 @@
 }
 
 .tooltip{
-background: #eee;
+background: #e3dde9;
 box-shadow: 0 0 5px #999999;
 color: #333;
 display: none;
@@ -49,40 +49,25 @@ text.big-text{
 </style>
 <body>
 <div style="display:flex; flex-direction:column; align-items: center;">
-<svg></svg>
-<select id='colorFill' onchange="drawmap()">
-  <option value="college-degree">College Degree</option>
-  <option value="yes">Voted Yes (%)</option>
-  <option value="afro">Afrocolombian population(%)</option>
-  <option value="indigenous">Indigineous Population(%)</option>
-</select>
+  <svg></svg>
+  <select id='colorFill' onchange="drawmap()">
+    <option value="college-degree">College Degree</option>
+    <option value="yes">Voted Yes (%)</option>
+    <option value="afro">Afrocolombian population(%)</option>
+    <option value="indigenous">Indigineous Population(%)</option>
+  </select>
 </div>
 
 <script src="https://d3js.org/d3.v3.min.js"></script>
 <script>
 var drawmap = function(){
 
-  var width = 400,
-      height = 500,
+  var width = 500,
+      height = 600,
       centered;
 
-  // Define color scale
-
-
-    //   function(userOption){
-    //   if (userOption === 'college-degree'){
-    //     return [('#d0d0ff', '#033798' )]
-    //   }
-    //   else if (userOption === 'afro'){
-    //     return [('#fab400', '#fa6400')]
-    //   }
-    //   else{
-    //     return [('#96FA64', '#00c800')]
-    //   }
-    // });
-
     var projection = d3.geo.mercator()
-      .scale(1500)
+      .scale(1800)
       // Center the Map in Colombia
       .center([-74, 4.5])
       .translate([width / 2, height / 2]);
@@ -98,7 +83,7 @@ var drawmap = function(){
     // Add background
     svg.append('rect')
       .attr('class', 'background')
-      .attr('width', 400)
+      .attr('width', width)
       .attr('height', height)
       .on('click', clicked);
 
@@ -129,19 +114,19 @@ var drawmap = function(){
 
     var color_range = function(userOption){
     if (userOption === 'college-degree'){
-      myColorRange = ['#549BFD', '#000931']
+      myColorRange = ['#48ccff', '#004864']
     }
 
     else if (userOption === 'afro'){
-      myColorRange = ['#ade9e9', '#2db4b4']
+      myColorRange = ['#abffed', '#20b293']
     }
 
     else if (userOption === 'indigenous'){
-      myColorRange = ['#9bfd54', '#00D214']
+      myColorRange = ['#5cff30', '#209600']
     }
 
     else{
-      myColorRange =['#000931','#A00000']
+      myColorRange =['#ff6284','#af0026']
     }
   }
 
@@ -258,6 +243,11 @@ function clicked(d) {
     .duration(750)
     .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')scale(' + k + ')translate(' + -x + ',' + -y + ')');
 }
+
+
+var tooltip = d3.select('#chart')            // NEW
+  .append('div')                             // NEW
+  .attr('class', 'tooltip');
 
 function mouseover(d){
   // Highlight hovered province
