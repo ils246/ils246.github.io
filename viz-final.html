@@ -1,0 +1,160 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<script type="text/javascript" src="d3.v3.min.js"></script>
+<script src="https://d3plus.org/js/d3.js"></script>
+<script src="https://d3plus.org/js/topojson.js"></script>
+<script src="https://d3plus.org/js/d3plus.js"></script>
+<script src="distca-2012.js"></script>
+<script src="ego-CA.js"></script>
+<script src="jsnetworkx.js"></script>
+<style>
+  body {
+    background-color: #414F75
+  }
+
+  h1{
+    text-align: center;
+    padding: 10px;
+    font-family: "Century Gothic";
+    color: #D7DFF3 ;
+    font-weight: normal;
+  }
+  p{
+    color: #c3cbdf;
+    padding: 15px 30px;
+    font-family: "Optima";
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 25px;
+
+  }
+
+  .parent{
+    margin: auto;
+    text-align: center;
+    display: flex;
+    align-items: center;
+
+  }
+
+  .info{
+    width: 300px;
+    height: 200px;
+    display: inline-block;
+    background: #313d5a;
+    margin: auto;
+  }
+  .rect_d3plus_data{
+    fill: #3CEDA6
+  }
+  d3-tip{
+    font-family: 'Century Gothic, Helvetica, sans-serif';
+    line-height: 1;
+    font-weight: normal;
+    padding: 12px;
+    background: #272f46);
+    color: #ffffff;
+    border-color: #3CEDA6;
+    border-width: 1px;
+    text-align: right;
+    font-size: 12px
+}
+  .nets{
+    background-color: #414F75;
+    margin: right;
+    display: inline-block;
+  }
+
+</style>
+<script>
+  window.addEventListener('load', function() {
+
+   //Canada
+
+      var egoca = egoCA;
+
+      var G = new jsnx.Graph();
+
+      G.addNodesFrom(egoca.nodes.map(function(obj){
+        return [obj.id, {}] ;
+      }));
+
+      G.addEdgesFrom(egoca.links.map(function(obj) {
+        return [egoca.nodes[obj.source].id, egoca.nodes[obj.target].id, obj.transactions];
+      }));
+
+      jsnx.draw(G, {
+        element: '#canvas1',
+        weighted: false,
+        withLabels: true,
+        height: 500,
+        width: 600,
+
+      edgeStyle: {
+        'stroke-width': 2,
+        fill: '#9cb0e1',//'#b0c0e7',//'#D7DFF3' //'#C5D4EB'
+      },
+
+      nodeAttr: {r: 6},
+
+      layoutAttr: {
+          charge: -350,
+          linkDistance: 150
+      },
+
+      nodeStyle: {
+          fill: '#3CEDA6',
+          stroke: 'none'
+      },
+
+      labelAttr:{
+        x:10,
+        y:20,
+
+      },
+
+      stickyDrag: true,
+
+      labelStyle: {
+        fill:  '#D7DFF3',//'#191e2d',
+        'font-family': 'Century Gothic, sans serif',
+        'font-size' : 14
+
+     },
+    });
+
+    var data = distca2012;
+
+    function make_viz(data){
+      var visualization = d3plus.viz()
+        .container("#dist2012")
+        .data(data)
+        .type("bar")
+        .id('name')
+        .color({ value: '#3CEDA6', missing: "#3CEDA6" })
+        .y({value: 'transactions', grid: {color: '#909099'}, ticks: {color: '#909099'}})
+        .x({value: function() { return 2008; }, grid: false })
+        .background('#414F75')   //'#313d5a'
+        .axes({"background": {"color": "#313d5a", stroke: {width: 0}}})
+        .font({color: 'white'})
+         /* .order('asc') messes up the x axis, so if I can count the number of bars before me, and multiply it by width, then I can have my x position. */
+        .draw()
+      }
+
+      make_viz(data)
+
+  });
+</script>
+</head>
+<body>
+  <h1>Who does Canada lend to? </h1>
+  <div class= 'parent' style="width: 100%; padding-bottom: 0">
+    <div class= 'nets' id="canvas1" ></div>
+    <div class='info' id='dist2012' style = "height: 500px; width : 800px"></div>
+  </div>
+  <div><p style ="text-align:right; padding-top: 0 "><i>This histogram shows the log of the distribution of the outgoing number of transactions from Canada <br>
+    to other Kiva members</p></div>
+</body>
+</html>
