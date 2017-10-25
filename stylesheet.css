@@ -11,7 +11,7 @@ body{
 }
 
 #background-image{
-  height: 900px;
+  height: 850px;
   position: absolute;
   z-index: -1;
   top: 0;
