@@ -2,7 +2,6 @@ body{
   margin: 0;
   background-color: #011F26;
   color: #fff;
-  opacity: 0.9;
   font-family: 'Raleway',sans-serif;
 }
 
@@ -12,14 +11,14 @@ body{
 }
 
 #background-image{
-  height: 1000px;
+  height: 900px;
   position: absolute;
   z-index: -1;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  background-image: url("banner.jpg");
+  background-image: url("./banner.jpg");
   background-size: 100% ;
   opacity: 0.75;
 }
@@ -53,6 +52,7 @@ p{
 #page_title{
   /*padding-left: 12%;*/
   width: 40%;
+  height: 15%;
   line-height: 65px;
   align-self: center;
   font-size: 78px;
@@ -64,9 +64,10 @@ p{
 #page_description{
   /*padding-left:12%;*/
   width:40%;
+  height: 50%;
   align-self: center;
   text-align: center;
-  line-height: 25px;
+  line-height: 20px;
   padding-top: 25px;
 }
 
