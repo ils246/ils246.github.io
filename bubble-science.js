@@ -27,7 +27,7 @@ var science = [
     "name": "Other content",
     "value": 1974106,
     "category":1,
-    "percent":"100%",
+    "percent":"96.56%",
     "children":[],
   },
   {
