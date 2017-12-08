@@ -1,0 +1,68 @@
+WHY CITATIONS ARE NOT ENOUGH 
+————————————————————————————
+
+The discovery of high-temperature superconductors, the determination of DNA’s double-helix structure, the first observations that the expansion of the Universe is accelerating — all of these breakthroughs won Nobel prizes and international acclaim. Yet none of the papers that announced them comes anywhere close to ranking among the 100 most highly cited papers of all time.Richard Van Noorden, Brendan Maher& Regina Nuzzo 2014 Nature
+
+“If citations are what you want,” he says, “devising a method that makes it possible for people to do the experiments they want at all, or more easily, will get you a lot further than, say, discovering the secret of the Universe”.
+
+
+The highest-impact papers were not the ones that had the greatest novelty, but had a combination of novelty and otherwise conventional combinations of prior work.
+
+
+
+
+DIFFERENCES ACROSS FIELDS
+——————————————————————————
+
+Variations in the empirically extracted parameters of the growth kernels and aging functions associated with different journals point to research-field-specific characteristics of citation intensity and knowledge flow. K. Highama, Governalea, Jaffeb, Zulicke, Arvix, 2017 
+
+
+Radicchi, Fortunato, and Castellano [Radicchi, F., Fortunato, S., & Castellano, C. (2008). Universality of citation distributions: Toward an objective measure of scientific impact. Proceedings of the National Academy of Sciences, 105(45), 17268–17272] claim that, apart from a scaling factor, all fields of science are characterized by the same citation distribution. Waltman, L., van Eck, N. J., & van Raan, A. F. (2012). Universality of citation distributions revisited. Journal of the Association for Information Science and Technology, 63(1), 72-77.
+
+The validity of the universality claim is also investigated in a recent paper
+on the skewness of citation distributions (Albarrán, Crespo, Ortuño, & Ruiz-Castillo,
+2011a, 2011b). This paper uses a different methodology than we do, but it arrives at a
+similar conclusion. 
+
+	- auxiliary claims: the distribution of the proportion top 10% publications for the 184 fields in our analysis is more dispersed than would be expected if citation distributions are universal.
+
+	- Limitations : 750,000  papers 
+	- Papers that appear on 1999 and 1994
+	- Dataset WOB
+
+
+
+UNDERSTANDING THE AGE OF KNOWLEDGE 
+———————————————————————————————————-
+
+The hotspot’s generality indicates that there is an age distribution of
+prior knowledge that is particularly linked to tomorrow’s breakthroughs.
+Future research should begin to investigate what is unique about the
+knowledge that follows this distribution.
+
+Diverging arguments and little empirical study on the information
+search question have meant that the link between the age of information
+referenced in a work and a work’s impact remains an open question. Satyam Mukherjee,1,2 Daniel M. Romero,1,2,3 Ben Jones,1,4 Brian Uzzi1,2SCIENCE ADVANCES, 2017
+
+	-Limitations: They only look at the top 5% of papers -> Does looking at outliers 	give us insight into the dynamics of the whole field?
+	-Dataset WOB
+	- Mean and variation are main indicators, but is the mean the best way to 		characterize what is a very fat tailed distribution?
+
+Questions:
+Drawing narrowly on recent ideas does not lead to exceptional
+impact. Similarly, drawing on vintage knowledge or widely sampled work
+is associated with an impact no greater than expected by chance. - is this driven by the effect mentioned by Dashun?
+
+Things to look at:
+Future research should begin to investigate what is unique about the
+knowledge that follows this distribution.
+
+Amidst these new questions and
+directions for future work, our findings reveal that the age of information
+is a remarkably powerful and heretofore unknown predictor of
+high-impact work in science and technology.
+
+
+OVERALL 
+
+Science is dynamic, with research areas shifting and new fields arising. Although we find that the regularities relating novelty, conventionality, and impact persist across time and fields, understanding how research trajectories shift and how new fields are born are questions that measures of novelty and convention may valuably inform.
