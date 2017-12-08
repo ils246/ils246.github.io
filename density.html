@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Scientific Revolutions - Main</title>
+    <link href="https://fonts.googleapis.com/css?family=Lobster|Lobster+Two|Pompiere|Raleway:200|Work+Sans:200" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./stylesheet.css">
+  </head>
+  <body>
+      <div class='bkgnd'>
+      <div class='page'>
+        <h2>Searching for Scientific Revolutions</h2>
+        <div class="text">
+          <p class ="title-content">Citation Analysis<p>
+          <p>In order to begin our search for paradigm shifts in science, we being
+              by understanding the <i style="color: #04BBBF">average system behavior</i> for citation patterns.
+            </br>
+            </br>
+              First, we explore the dependance on previous knowledge for the knowledge
+              output of a particular year. We do this by plotting the distribution of the publication year of
+              all the references in our corpus from the last <i style="color: #FF594F">five</i> years.
+            </br>
+            </br>
+              We plot the raw counts and the densities to correct for citation inflation and the increase
+               of papers publoshed per year.
+             </p>
+             <div class="button-containter" style="width:50%; height:40px;">
+               <div class="button"><a href="./raw-counts.html"> Raw Counts</a> </div>
+               <div class="button">Density</div>
+            </div>
+             <div class="bar-plot" id="bar2017">
+               <svg class="chart2017"></svg>
+             </div>
+             <div class="bar-plot" id="bar2016">
+               <svg class="chart2016"></svg>
+             </div>
+             <div class="bar-plot" id="bar2015">
+               <svg class="chart2015"></svg>
+             </div>
+             <div class="bar-plot" id="bar2014">
+               <svg class="chart2014"></svg>
+             </div>
+             <div class="bar-plot" id="histograms" style='background-image: url("./histograms.png"); background-size:cover;  margin-top:50px;'>
+             </div>
+            <div class="bar-plot" id="histograms" style='background-image: url("./my-density-fig.png"); background-size:contain; background-repeat:none;background-repeat:no-repeat; '>
+            </div>
+            <div class="bar-plot" id="histograms" style='background-image: url("./detailed-timeseries.png"); background-size:contain;background-repeat:no-repeat;'>
+            </div>
+            <div class="bar-plot" id="histograms" style='background-image: url("./most-likely-fos-1930.png"); background-size:contain;background-repeat:no-repeat;'>
+            </div>
+            <div class="bar-plot" id="histograms" style='background-image: url("./most-likely-fos-1940.png"); background-size:contain;background-repeat:no-repeat;'>
+            </div>
+            <div class="bar-plot" id="histograms" style='background-image: url("./most-likely-fos-1950.png"); background-size:contain;background-repeat:no-repeat;'>
+            </div>
+            <div class="bar-plot" id="histograms" style='background-image: url("./most-likely-fos-1960.png"); background-size:contain;background-repeat:no-repeat;'>
+            </div>
+            <div class="bar-plot" id="histograms" style='background-image: url("./most-likely-fos-1980.png"); background-size:contain;background-repeat:no-repeat;'>
+            </div>
+            <div class="bar-plot" id="histograms" style='background-image: url("./most-likely-fos-1990.png"); background-size:contain;background-repeat:no-repeat;'>
+            </div>
+            <div class="bar-plot" id="histograms" style='background-image: url("./most-likely-fos-2000.png"); background-size:contain;background-repeat:no-repeat;'>
+            </div>
+            <div class="bar-plot" id="histograms" style='background-image: url("./most-likely-fos-2010.png"); background-size:contain;background-repeat:no-repeat;'>
+            </div>
+            <div class="bar-plot" id="histograms" style='background-image: url("./most-likely-fos-2015.png"); background-size:contain;background-repeat:no-repeat;'>
+            </div>
+
+
+
+
+
+        </div>
+        <script src="http://d3js.org/d3.v3.min.js"></script>
+        <script type="text/javascript" src="bar2017.js"></script>
+        <script type="text/javascript" src="bar2016.js"></script>
+        <script type="text/javascript" src="bar2015.js"></script>
+        <script type="text/javascript" src="bar2014.js"></script>
+  </body>
+</html>
