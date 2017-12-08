@@ -56,8 +56,8 @@ var habbits = [
 
   {category: "Mathematics", name: "Mathematics", value: 2131907,"words": " These are random words "},
   {category: "Medicine", name: "Medicine", value: 7032531,"words": " These are random words "},
-  {category: "Pathology", name: "Pathology", alt: "and eating!", value: 3104917},
-  {category: "Surgery", name: "Surgery", alt: "♪♫♬", value: 6707634},
+  {category: "Pathology", name: "Pathology", alt: "and eating!", value: 3104917, "words": " These are random words "},
+  {category: "Surgery", name: "Surgery", alt: "♪♫♬", value: 6707634, "words": " These are random words "},
   {category: "Materials Science", name: "Materials Science", alt: "#$#%*&^$#@", value: 2614036},
   {category: "Immunology", name: "Immunology", alt: "watch with friends:D", value: 213070},
 
