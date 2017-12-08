@@ -46,16 +46,16 @@ var tooltip1 = d3.select("body") //set the tooltip
 
 // 1. Modify the dataset
 var habbits = [
-  {category: "Physics", name: "Physics", value: 4007603, "words": "words random "},
-  {category: "Chemistry", name: "Chemistry", value: 4623551},
+  {category: "Physics", name: "Physics", value: 4007603, "words": " These are random words "},
+  {category: "Chemistry", name: "Chemistry", value: 4623551, "words": " These are random words "},
   {category: "Biology", name: "Biology", alt: "sweating and relaxing", value: 5683806, "words": 'cell life gene expression plant protein'},
-  {category: "Psychology", name: "Psychology", alt: "and eating!", value: 2286709},
+  {category: "Psychology", name: "Psychology", alt: "and eating!", value: 2286709,"words": " These are random words "},
   {category: "Engineering", name: "Engineering", alt: "♪♫♬", value: 6707634},
-  {category: "Forensic engineering", name: "Forensic engineering", alt: "#$#%*&^$#@", value: 2566645},
-  {category: "Engineering drawing", name: "Engineering drawing", alt: "watch with friends:D", value: 2021482},
+  {category: "Forensic engineering", name: "Forensic engineering", alt: "#$#%*&^$#@", value: 2566645,"words": " These are random words "},
+  {category: "Engineering drawing", name: "Engineering drawing", alt: "watch with friends:D", value: 2021482,"words": " These are random words "},
 
-  {category: "Mathematics", name: "Mathematics", value: 2131907},
-  {category: "Medicine", name: "Medicine", value: 7032531},
+  {category: "Mathematics", name: "Mathematics", value: 2131907,"words": " These are random words "},
+  {category: "Medicine", name: "Medicine", value: 7032531,"words": " These are random words "},
   {category: "Pathology", name: "Pathology", alt: "and eating!", value: 3104917},
   {category: "Surgery", name: "Surgery", alt: "♪♫♬", value: 6707634},
   {category: "Materials Science", name: "Materials Science", alt: "#$#%*&^$#@", value: 2614036},
